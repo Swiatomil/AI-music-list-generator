@@ -25,8 +25,8 @@ def list_creator(name: str, id_list):
     )
     sp.user_playlist_add_tracks(cu['id'], sp_list['id'], id_list)
 
+def list_of_title_to_IDs(titles):
 
-if __name__ == "__main__":
     sp = spotipy.Spotify(
         auth_manager=spotipy.SpotifyOAuth(
             client_id=os.getenv('SPOTIFY_CLIENT_ID'),
@@ -35,6 +35,11 @@ if __name__ == "__main__":
             scope="playlist-modify-private"
         )
     )
-    song_id = sp.search(q='syn okiennika', type='track', limit=1)['tracks']['items'][0]['id']
-    print(song_id)
-    list_creator("aberracja", [song_id])
+    IDs=[]
+    for title in titles:
+        song_id = sp.search(q=title['title']+', '+title['artist'], type='track', limit=1)['tracks']['items'][0]['id']
+        IDs.append(song_id)
+    return IDs
+
+
+

@@ -1,7 +1,7 @@
 import openai
 from dotenv import load_dotenv
 import json
-import argparse
+
 
 def create_playlist(count = "5", prompt=""):
     load_dotenv(".env")
